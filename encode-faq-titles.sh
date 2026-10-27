@@ -10,7 +10,8 @@ else
         echo "no AUTH_PASSWORD provided!"
         exit 1
     fi
-    NLP_API_URL=https://nlp.stampy.ai/api/encode-faq-titles
+    # Call Cloud Run directly: nlp.stampy.ai goes through Cloudflare, which times out after 100s
+    NLP_API_URL=https://stampy-nlp-507517956350.us-west1.run.app/api/encode-faq-titles
     curl -X POST -f -u stampy:$AUTH_PASSWORD $NLP_API_URL -H 'Content-Type: application/json' > stampy-duplicates.json
 fi
 
